@@ -14,3 +14,30 @@ configuration:
   firewall:
     name: OTBR firewall
     description: Use OpenThread Border Router firewall to block unnecessary traffic.
+  mqtt_broker_name:
+    name: MQTT Broker name
+    description: Name / address of MQTT broker to connect to.
+  mqtt_broker_port:
+    name: MQTT Broker port
+    description: Port number (non-secure) of MQTT broker to connect to.
+  mqtt_sn_gateway_name:
+    name: MQTT-SN Gateway name
+    description: Name of the MQTT-SN Gateway.
+  mqtt_sn_mcast_ipv6_mesh_loc:
+    name: MQTT-SN Gateway IPv6 mesh local address as multicast
+    description: Check this option to use thread mesh local address as IPv6 multicast address for MQTT-SN Gateway.
+  mqtt_sn_mcast_ipv6:
+    name: MQTT-SN Gateway IPv6 multicast address
+    description: Provide IPv6 address to set as multicast address for MQTT-SN Gateway.
+  mqtt_sn_ipv6_port:
+    name: MQTT-SN Gateway IPv6 port number
+    description: Specify MQTT-SN Gateway port numer (port to listen to and for multicast).
+  mqtt_sn_gateway_id:
+    name: MQTT-SN Gateway ID
+    description: An identifier of MQTT-SN Gateway.
+  mqtt_sn_gateway_max_clients:
+    name: MQTT-SN Gateway max clients
+    description: Max. number of clients of MQTT-SN Gateway.
+  mqtt_sn_mcast_hops:
+    name: MQTT-SN Gateway multicast hops
+    description: Specify a limit of hops in multicast communication for MQTT-SN Gateway.

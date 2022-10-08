@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bashio
+#==============================================================================
+# Paho MQTT-SN Gateway finish script
+#==============================================================================
+bashio::log.info "[MQTT-SN] Gateway ended with exit code ${1} (signal ${2})..."

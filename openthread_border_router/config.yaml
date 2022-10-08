@@ -1,8 +1,8 @@
 version: 0.2.3
 slug: openthread_border_router
 name: OpenThread Border Router
-description: OpenThread Border Router add-on
-url: https://github.com/home-assistant/addons-development/tree/master/openthread_border_router
+description: OpenThread Border Router add-on with Paho MQTT-SN Gateway
+url: https://github.com/slavek1250/ha-addons-dev/tree/master/openthread_border_router
 arch:
   - armv7
   - aarch64
@@ -22,12 +22,30 @@ options:
   flow_control: false
   otbr_debug: false
   firewall: true
+  mqtt_broker_name: mqtt.eclipseprojects.io
+  mqtt_broker_port: 1883
+  mqtt_sn_gateway_name: HaMqttSnGw
+  mqtt_sn_mcast_ipv6_mesh_loc: true
+  mqtt_sn_mcast_ipv6: FF03:5F44:140::1
+  mqtt_sn_gateway_id: 1
+  mqtt_sn_gateway_max_clients: 30
+  mqtt_sn_ipv6_port: 47193
+  mqtt_sn_mcast_hops: 1
 schema:
   device: device(subsystem=tty)
   baudrate: list(57600|115200|230400|460800|921600)
   flow_control: bool
   otbr_debug: bool
   firewall: bool
+  mqtt_broker_name: str(,100)
+  mqtt_broker_port: port
+  mqtt_sn_gateway_name: str(,50)
+  mqtt_sn_mcast_ipv6_mesh_loc: bool
+  mqtt_sn_mcast_ipv6: str(,40)
+  mqtt_sn_ipv6_port: port
+  mqtt_sn_gateway_id: int(1,255)
+  mqtt_sn_gateway_max_clients: int(1,100)
+  mqtt_sn_mcast_hops: int(1,18)
 stage: experimental
 startup: services
 ingress: true
