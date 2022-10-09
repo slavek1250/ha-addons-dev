@@ -7,7 +7,7 @@ set_conf_value () {
     local conf_file=$1
     local conf_key=$2
     local conf_val=$3
-    sed -i "s/^${conf_key}=.*$/${conf_key}=${conf_val}/" $conf_file
+    sed -i "s/^#*${conf_key}=.*$/${conf_key}=${conf_val}/" $conf_file
 }
 
 . /etc/s6-overlay/scripts/otbr-agent-common
@@ -24,11 +24,13 @@ declare gateway_mcast_ipv6
 declare gateway_mcast_hops
 cnf_file="/etc/s6-overlay/s6-rc.d/paho-mqtt-sn-gateway/conf/gateway.conf"
 output_pipe="/etc/s6-overlay/s6-rc.d/paho-mqtt-sn-gateway/scripts/output-pipe.sh"
-gateway_id=$(hassio::config 'mqtt_sn_gateway_id')
-gateway_name=$(hassio::config 'mqtt_sn_gateway_name')
-gateway_max_clients=$(hassio::config 'mqtt_sn_gateway_max_clients')
-broker_name=$(hassio::config 'mqtt_broker_name')
-broker_port=$(hassio::config 'mqtt_broker_port')
+gateway_id=$(bashio::config 'mqtt_sn_gateway_id')
+gateway_name=$(bashio::config 'mqtt_sn_gateway_name')
+gateway_max_clients=$(bashio::config 'mqtt_sn_gateway_max_clients')
+broker_name=$(bashio::config 'mqtt_broker_name')
+broker_port=$(bashio::config 'mqtt_broker_port')
+broker_user=$(bashio::config 'mqtt_broker_user')
+broker_pass=$(bashio::config 'mqtt_broker_pass')
 gateway_ipv6_port=$(bashio::config 'mqtt_sn_ipv6_port')
 gateway_mcast_ipv6=$(bashio::config 'mqtt_sn_mcast_ipv6')
 gateway_mcast_hops=$(bashio::config 'mqtt_sn_mcast_hops')
@@ -49,6 +51,14 @@ set_conf_value ${cnf_file} "MulticastIPv6PortNo" ${gateway_ipv6_port}
 set_conf_value ${cnf_file} "MulticastIPv6" ${gateway_mcast_ipv6}
 set_conf_value ${cnf_file} "MulticastIPv6If" ${thread_if}
 set_conf_value ${cnf_file} "MulticastHops" ${gateway_mcast_hops}
+
+if [[ ! ${broker_user} == "" ]]; then
+    set_conf_value ${cnf_file} "LoginID" ${broker_user}
+fi
+
+if [[ ! ${broker_pass} == "" ]]; then
+    set_conf_value ${cnf_file} "Password" ${broker_pass}
+fi
 
 bashio::log.info "[MQTT-SN] Starting gateway"
 exec stdbuf -oL /usr/sbin/MQTT-SNGateway -f ${cnf_file} \

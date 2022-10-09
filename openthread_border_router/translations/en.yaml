@@ -20,6 +20,12 @@ configuration:
   mqtt_broker_port:
     name: MQTT Broker port
     description: Port number (non-secure) of MQTT broker to connect to.
+  mqtt_broker_user:
+    name: MQTT Broker user name
+    description: MQTT Broker user name.
+  mqtt_broker_pass:
+    name: MQTT Broker user password
+    description: MQTT Broker user password.
   mqtt_sn_gateway_name:
     name: MQTT-SN Gateway name
     description: Name of the MQTT-SN Gateway.
