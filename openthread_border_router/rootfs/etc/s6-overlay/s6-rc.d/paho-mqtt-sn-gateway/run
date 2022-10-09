@@ -36,7 +36,8 @@ gateway_mcast_ipv6=$(bashio::config 'mqtt_sn_mcast_ipv6')
 gateway_mcast_hops=$(bashio::config 'mqtt_sn_mcast_hops')
 
 if bashio::config.true 'mqtt_sn_mcast_ipv6_mesh_loc'; then
-    gateway_mcast_ipv6=$(ot-ctl dataset meshlocalprefix | sed -n 1p | sed 's/Mesh Local Prefix: //' | awk -F '::' '{print $1}')
+    mesh_local_prefix=$(ot-ctl prefix meshlocal | sed -n 1p | sed 's/Mesh Local Prefix: //' | awk -F '::' '{print $1}')
+    gateway_mcast_ipv6="ff33:40:${mesh_local_prefix}::1"
     bashio::log.info "[MQTT-SN] Multicast IPv6 address set to mesh local: ${gateway_mcast_ipv6}"
 fi
 
