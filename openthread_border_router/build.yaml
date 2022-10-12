@@ -2,3 +2,5 @@ build_from:
   armv7: ghcr.io/home-assistant/armv7-base-debian:bullseye
   aarch64: ghcr.io/home-assistant/aarch64-base-debian:bullseye
   amd64: ghcr.io/home-assistant/amd64-base-debian:bullseye
+# args:
+#   --sysctl: net.ipv6.conf.all.disable_ipv6=0 net.ipv6.conf.all.accept_ra=2 net.ipv6.conf.all.accept_ra_rt_info_max_plen=6 net.ipv6.conf.all.forwarding=1 net.ipv4.conf.all.forwarding=1
